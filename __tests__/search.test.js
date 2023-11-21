@@ -1,17 +1,23 @@
 // @ts-check
 
 import {
-  describe, expect, it, test,
+  describe, expect, it,
 } from '@jest/globals';
 import search from '../index.js';
 
 describe('search', () => {
-  test('empty', () => {
-    expect(search([], 'shoot')).toHaveLength(0);
+  it.each([
+    ['', []],
+    ['shoot', []],
+  ])('empty', (word, result) => {
+    const res = search([], word);
+
+    expect(res).toHaveLength(0);
+    expect(res).toEqual(result);
   });
 
   it.each([
-    ['shoot', ['doc1', 'doc2']],
+    ['shoot', ['doc2', 'doc1']],
     ['pint!', ['doc1']],
   ])('word %p expecting %p', (word, result) => {
     const docs = [
@@ -20,7 +26,7 @@ describe('search', () => {
       { id: 'doc3', text: 'I\'m your shooter.' },
     ];
 
-    const res = search(docs, 'shoot');
+    const res = search(docs, word);
 
     expect(res).not.toHaveLength(0);
     expect(res).toEqual(expect.arrayContaining(result));
