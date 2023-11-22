@@ -12,12 +12,37 @@ function compare(a, b) {
   return 0;
 }
 
-function toRelev(doc, wordTerm) {
-  let relev = 0;
-  doc.textTerm.forEach((term) => {
-    if (term === wordTerm) {
-      relev += 1;
+function intersectionCount(textTerm, wordTerm) {
+  let i = 0;
+
+  wordTerm.forEach((term) => {
+    if (textTerm.includes(term)) {
+      i += 1;
     }
+  });
+
+  return i;
+}
+
+function hasIntersection(textTerm, wordTerm) {
+  for (let i = 0; i < wordTerm.length; i += 1) {
+    if (textTerm.includes(wordTerm[i])) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function toRelev(doc, wordTerm) {
+  let relev = intersectionCount(doc.textTerm, wordTerm);
+
+  wordTerm.forEach((wTerm) => {
+    doc.textTerm.forEach((term) => {
+      if (term === wTerm) {
+        relev += 1;
+      }
+    });
   });
 
   return {
@@ -31,7 +56,7 @@ export default (docs, word) => {
     return [];
   }
 
-  const wordTerm = word.match(REG_EXP)[0];
+  const wordTerm = word.match(REG_EXP);
 
   const termDocs = docs.map((doc) => ({
     id: doc.id,
@@ -39,7 +64,7 @@ export default (docs, word) => {
   }));
 
   return termDocs
-    .filter((doc) => doc.textTerm.includes(wordTerm))
+    .filter((doc) => hasIntersection(doc.textTerm, wordTerm))
     .map((doc) => toRelev(doc, wordTerm))
     .sort(compare)
     .map((doc) => doc.id);

@@ -19,6 +19,7 @@ describe('search', () => {
   it.each([
     ['shoot', ['doc2', 'doc1']],
     ['pint!', ['doc1']],
+    ['shoot at me', ['doc2', 'doc1']],
   ])('word %p expecting %p', (word, result) => {
     const docs = [
       { id: 'doc1', text: 'I can\'t shoot straight unless I\'ve had a pint!' },
