@@ -15,8 +15,8 @@ function compare(a, b) {
 function intersectionCount(textTerm, wordTerm) {
   let i = 0;
 
-  wordTerm.forEach((term) => {
-    if (textTerm.includes(term)) {
+  textTerm.forEach((term) => {
+    if (term === wordTerm) {
       i += 1;
     }
   });
@@ -34,27 +34,23 @@ function hasIntersection(textTerm, wordTerm) {
   return false;
 }
 
-function toRelev(doc, wordTerm) {
-  let relev = intersectionCount(doc.textTerm, wordTerm);
-
-  wordTerm.forEach((wTerm) => {
-    doc.textTerm.forEach((term) => {
-      if (term === wTerm) {
-        relev += 1;
-      }
-    });
+function tfidf(index, doc, count, wordTerm) {
+  let sum = 0;
+  wordTerm.forEach((term) => {
+    const tf = doc.textTerm.length / intersectionCount(doc.textTerm, term);
+    const idf = Math.log10(count / index[term].length);
+    sum += (tf * idf);
   });
 
-  return {
-    id: doc.id,
-    relev,
-  };
+  return sum;
 }
 
 export default (docs, word) => {
   if (!word) {
     return [];
   }
+
+  const count = docs.length;
 
   const wordTerm = word.match(REG_EXP);
 
@@ -78,7 +74,10 @@ export default (docs, word) => {
 
   return termDocs
     .filter((doc) => hasIntersection(doc.textTerm, wordTerm))
-    .map((doc) => toRelev(doc, wordTerm))
+    .map((doc) => ({
+      id: doc.id,
+      relev: tfidf(index, doc, count, wordTerm),
+    }))
     .sort(compare)
     .map((doc) => doc.id);
 };
