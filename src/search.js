@@ -63,6 +63,19 @@ export default (docs, word) => {
     textTerm: doc.text.match(REG_EXP),
   }));
 
+  const index = {};
+  termDocs.forEach((doc) => {
+    doc.textTerm.forEach((term) => {
+      if (!index[term]) {
+        index[term] = [];
+      }
+
+      if (!index[term].includes(doc.id)) {
+        index[term].push(doc.id);
+      }
+    });
+  });
+
   return termDocs
     .filter((doc) => hasIntersection(doc.textTerm, wordTerm))
     .map((doc) => toRelev(doc, wordTerm))
