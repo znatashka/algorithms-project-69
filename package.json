@@ -1,6 +1,6 @@
 {
-  "name": "hexlet/project",
-  "version": "0.0.1",
+  "name": "hexlet/code",
+  "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/znatashka/algorithms-project-69/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/znatashka/algorithms-project-69/actions)",
   "main": "index.js",
   "dependencies": {
