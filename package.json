@@ -1,30 +1,8 @@
 {
-  "name": "@hexlet/nodejs-package",
-  "version": "0.0.3",
-  "description": "Node.js boilerplate package",
-  "bin": {
-    "nodejs-package": "bin/nodejs-package.js"
-  },
-  "simple-git-hooks": {
-    "pre-push": "make lint"
-  },
-  "engines": {
-    "node": ">=14"
-  },
-  "scripts": {
-    "test": "npx jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hexlet-boilerplates/nodejs-package.git"
-  },
-  "author": "Kirill Mokevnin",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hexlet-boilerplates/nodejs-package/issues"
-  },
-  "type": "module",
-  "homepage": "https://github.com/hexlet-boilerplates/nodejs-package#readme",
+  "name": "hexlet-code",
+  "version": "1.0.0",
+  "description": "[![Actions Status](https://github.com/znatashka/algorithms-project-69/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/znatashka/algorithms-project-69/actions)",
+  "main": "index.js",
   "dependencies": {
     "debug": "^4.3.4",
     "lodash": "^4.17.21"
@@ -39,5 +17,25 @@
     "jest-cli": "^29.6.0",
     "npm-check-updates": "^16.10.11",
     "simple-git-hooks": "^2.8.1"
-  }
+  },
+  "simple-git-hooks": {
+    "pre-push": "make lint"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "test": "npx jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/znatashka/algorithms-project-69.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/znatashka/algorithms-project-69/issues"
+  },
+  "type": "module",
+  "homepage": "https://github.com/znatashka/algorithms-project-69#readme"
 }
