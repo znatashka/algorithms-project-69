@@ -12,7 +12,7 @@ function compare(a, b) {
   return 0;
 }
 
-function intersectionCount(textTerm, wordTerm) {
+function termCount(textTerm, wordTerm) {
   let i = 0;
 
   textTerm.forEach((term) => {
@@ -24,22 +24,14 @@ function intersectionCount(textTerm, wordTerm) {
   return i;
 }
 
-function hasIntersection(textTerm, wordTerm) {
-  for (let i = 0; i < wordTerm.length; i += 1) {
-    if (textTerm.includes(wordTerm[i])) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
 function tfidf(index, doc, count, wordTerm) {
   let sum = 0;
+
   wordTerm.forEach((term) => {
-    const tf = doc.textTerm.length / intersectionCount(doc.textTerm, term);
-    const termCount = index[term].length;
-    const idf = Math.log2(1 + (count - termCount + 1) / (termCount + 0.5));
+    const docsCount = index[term].length;
+
+    const tf = doc.textTerm.length / termCount(doc.textTerm, term);
+    const idf = Math.log2(1 + (count - docsCount + 1) / (docsCount + 0.5));
     sum += (tf * idf);
   });
 
@@ -74,7 +66,6 @@ export default function search(docs, word) {
   });
 
   return termDocs
-    .filter((doc) => hasIntersection(doc.textTerm, wordTerm))
     .map((doc) => ({
       id: doc.id,
       relev: tfidf(index, doc, count, wordTerm),
