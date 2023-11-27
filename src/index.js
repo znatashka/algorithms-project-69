@@ -44,8 +44,6 @@ export default function search(docs, word) {
     return [];
   }
 
-  console.log(docs, word);
-
   const count = docs.length;
 
   const wordTerm = word.match(REG_EXP);
