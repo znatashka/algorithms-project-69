@@ -2,11 +2,11 @@
 
 const REG_EXP = /\w+/g;
 
-function compare(a, b) {
-  if (a.relev < b.relev) {
+function reverse(a, b) {
+  if (a.relev > b.relev) {
     return -1;
   }
-  if (a.relev > b.relev) {
+  if (a.relev < b.relev) {
     return 1;
   }
   return 0;
@@ -70,6 +70,6 @@ export default function search(docs, word) {
       id: doc.id,
       relev: tfidf(index, doc, count, wordTerm),
     }))
-    .sort(compare)
+    .sort(reverse)
     .map((doc) => doc.id);
 }
