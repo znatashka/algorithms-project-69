@@ -30,7 +30,7 @@ function tfidf(index, doc, count, wordTerm) {
   wordTerm.forEach((term) => {
     const docsCount = index[term].length;
 
-    const tf = doc.textTerm.length / termCount(doc.textTerm, term);
+    const tf = termCount(doc.textTerm, term) / doc.textTerm.length;
     const idf = Math.log2(1 + (count - docsCount + 1) / (docsCount + 0.5));
     sum += (tf * idf);
   });
