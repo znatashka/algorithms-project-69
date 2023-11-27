@@ -1,7 +1,7 @@
 // @ts-check
 
 const REG_EXP = /\w+/g;
-const DOC_REG_EXP = /\s+|[.,\\/#!$%^&*;:{}=\-_`~()]/g;
+const DOC_REG_EXP = /\s+|\p{P}/gu;
 
 function reverse(a, b) {
   if (a.relev > b.relev) {
