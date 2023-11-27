@@ -38,7 +38,8 @@ function tfidf(index, doc, count, wordTerm) {
   let sum = 0;
   wordTerm.forEach((term) => {
     const tf = doc.textTerm.length / intersectionCount(doc.textTerm, term);
-    const idf = Math.log10(count / index[term].length);
+    const termCount = index[term].length;
+    const idf = Math.log2(1 + (count - termCount + 1) / (termCount + 0.5));
     sum += (tf * idf);
   });
 
