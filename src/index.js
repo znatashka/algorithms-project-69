@@ -45,7 +45,7 @@ function tfidf(index, doc, count, wordTerm) {
   return sum;
 }
 
-export default (docs, word) => {
+export default function search(docs, word) {
   if (!word) {
     return [];
   }
@@ -80,4 +80,4 @@ export default (docs, word) => {
     }))
     .sort(compare)
     .map((doc) => doc.id);
-};
+}

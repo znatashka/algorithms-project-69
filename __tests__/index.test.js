@@ -3,7 +3,7 @@
 import {
   describe, expect, it,
 } from '@jest/globals';
-import search from '../index.js';
+import search from '../src/index.js';
 
 describe('search', () => {
   it.each([
