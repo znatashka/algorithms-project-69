@@ -32,7 +32,7 @@ function tfidf(index, doc, count, wordTerm) {
     const docsCount = index[term].length;
 
     const tf = termCount(doc.textTerm, term) / doc.textTerm.length;
-    const idf = Math.log2(1 + (count - docsCount + 1) / (docsCount + 0.5));
+    const idf = Math.log2(1 + (count - docsCount + 1) / (docsCount + 0.5)); //
     sum += (tf * idf);
   });
 
